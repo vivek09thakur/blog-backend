@@ -1,4 +1,4 @@
-const api_uri = 'https://blog-backend-psi-ten.vercel.app/';
+const api_uri = 'https://blog-backend-psi-ten.vercel.app';
 // const api_uri = "http://127.0.0.1:8000/";
 
 function writeBlog(event) {
