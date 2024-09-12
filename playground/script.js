@@ -8,7 +8,7 @@ function writeBlog(event) {
     blog_links_list: document.getElementById("blog_links").value,
   };
 
-  fetch("https://blog-backend-psi-ten.vercel.app//write_blog/", {
+  fetch("https://blog-backend-psi-ten.vercel.app/write_blog/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Function to fetch all blogs
 async function fetchBlogs() {
-  const response = await fetch("https://blog-backend-psi-ten.vercel.app//get_blogs/");
+  const response = await fetch("https://blog-backend-psi-ten.vercel.app/get_blogs/");
   const data = await response.json();
   if (data.status === "success") {
     return data.blogs;
