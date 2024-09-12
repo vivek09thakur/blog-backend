@@ -42,7 +42,25 @@
       <button type="submit">Submit</button>
     </form>
 
-    <a href="blogs.html" >Go to Blog Feed</a>
+    <button id="delete_all">Delete All Blogs</button><br />
+
+    <a href="blogs.html">Go to Blog Feed</a>
+    <div style="width: 60%; margin: 0 auto">
+      <h2 style="text-align: start; padding-left: 1rem">Schemas</h2>
+      <ul style="text-align: left; font-size: 0.8rem; padding-left: 2rem">
+        <li>Blog Schema :</li>
+        <pre style="opacity: 0.5">
+              {
+                    'id':int,
+                    'blog_title': 'string',
+                    'blog_content': 'string',
+                    'blog_tags': ['tag1','tag2','tag3','tag4'],
+                    'blog_links': ['link1','link2','link3']
+              }
+            </pre
+        >
+      </ul>
+    </div>
 
     <script type="module" src="script.js"></script>
   </body>
