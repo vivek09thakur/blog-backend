@@ -13,12 +13,18 @@ def index(request):
 @csrf_exempt
 def write_blog(request):
     if request.method == 'POST':
-        blog_title = request.POST.get('blog_title')
-        blog_content = request.POST.get('blog_content')
-        blog_tags = request.POST.get('blog_tags')
-        blog_links = request.POST.get('blog_links_list')
-        blog_tags = [tag.strip() for tag in blog_tags.split(',')]
-        blog_links = [link.strip() for link in blog_links.split(',')]
+        try:
+            data = json.loads(request.body)
+            blog_title = data.get('blog_title')
+            blog_content = data.get('blog_content')
+            blog_tags = data.get('blog_tags')
+            blog_links = data.get('blog_links_list')
+            # split the tags and links into lists
+            blog_tags = [tag.strip() for tag in blog_tags.split(',')]
+            blog_links = [link.strip() for link in blog_links.split(',')]
+            
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
         
         # Create and save the blog post using Django's ORM
         blog_post = BlogPost(
@@ -33,6 +39,21 @@ def write_blog(request):
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
+def get_blogs(request):
+    try:
+        blogs = BlogPost.objects.all()
+        blog_list = []
+        for blog in blogs:
+            blog_data = {
+                'title': blog.title,
+                'content': blog.content,
+                'tags': blog.tags,
+                'links': blog.links
+            }
+            blog_list.append(blog_data)
+        return JsonResponse({'status': 'success', 'blogs': blog_list})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
 def get_blogs(request):
     try:
         blogs = BlogPost.objects.all()
