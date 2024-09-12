@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>blog backend/playground - endpoint: /write_blog/</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>blog backend/playground - endpoint: /write_blog/</h1>
+    <form class="upload-form">
+      <div class="main">
+        <div class="fields">
+          <input
+            type="text"
+            id="blog_title"
+            name="blog_title"
+            placeholder="Write a title for your blog"
+          />
+          <input
+            type="text"
+            id="blog_tags"
+            name="blog_tags"
+            placeholder="Give tags for your blog (write comma-seperated)"
+          />
+          <input
+            type="text"
+            id="blog_links"
+            name="blog_links"
+            placeholder="Reference Links (comma-separated):"
+          />
+        </div>
+        <div class="content">
+          <textarea
+            id="blog_content"
+            name="blog_content"
+            placeholder="Start writing your blog"
+          ></textarea>
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <a href="blogs.html" >Go to Blog Feed</a>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
