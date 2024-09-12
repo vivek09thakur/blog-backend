@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Backend Test Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form method="post" class="upload-form">
+      <input type="text" id="blog_title" placeholder="Blog Title" />
+      <input
+        type="text"
+        id="blog_tags"
+        placeholder="Blog Tags, separated by commas"
+      />
+      <input
+        type="text"
+        id="blog_links"
+        placeholder="Blog Links, separated by commas"
+      />
+      <textarea
+        type="text"
+        id="blog_content"
+        placeholder="Blog Content"
+      ></textarea>
+      <input type="submit" value="Publish" />
+    </form>
+    <a href="./allBlogs.html" target="_blank" rel="noopener noreferrer" style="color:blue">View all blogs</a>
+    <script src="script.js"></script>
+  </body>
+</html>
