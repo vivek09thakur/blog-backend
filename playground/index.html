@@ -3,65 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>blog backend/playground - endpoint: /write_blog/</title>
+    <title>Blog Backend Login</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1>blog backend/playground - endpoint: /write_blog/</h1>
-    <form class="upload-form">
-      <div class="main">
-        <div class="fields">
-          <input
-            type="text"
-            id="blog_title"
-            name="blog_title"
-            placeholder="Write a title for your blog"
-          />
-          <input
-            type="text"
-            id="blog_tags"
-            name="blog_tags"
-            placeholder="Give tags for your blog (write comma-seperated)"
-          />
-          <input
-            type="text"
-            id="blog_links"
-            name="blog_links"
-            placeholder="Reference Links (comma-separated):"
-          />
-        </div>
-        <div class="content">
-          <textarea
-            id="blog_content"
-            name="blog_content"
-            placeholder="Start writing your blog"
-          ></textarea>
-        </div>
-      </div>
+  <style>
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10% auto;
+      width: 30%;
 
-      <button type="submit">Submit</button>
+    }
+    .login-form input,.login-form button {
+      margin-bottom: 10px;
+      padding: .8rem;
+      width: 100%;
+      outline: 0;
+      border: 1px solid #cccccc42;
+      border-radius: 5px;
+    }
+    .login-form button{
+      background: #3d5aff;
+      border: 0;
+    }
+  </style>
+  <body>
+    <h1>Blog Backend Login</h1>
+    <form class="login-form">
+      <input
+        type="email"
+        id="username"
+        name="username"
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+        required
+        autocomplete="new-password"
+      />
+      <button type="submit">Login</button>
     </form>
 
-    <button id="delete_all">Delete All Blogs</button><br />
+    <script type="module">
+      import { authAdmin } from "./script.js";
 
-    <a href="blogs.html">Go to Blog Feed</a>
-    <div style="width: 60%; margin: 0 auto">
-      <h2 style="text-align: start; padding-left: 1rem">Schemas</h2>
-      <ul style="text-align: left; font-size: 0.8rem; padding-left: 2rem">
-        <li>Blog Schema :</li>
-        <pre style="opacity: 0.5">
-              {
-                    'id':int,
-                    'blog_title': 'string',
-                    'blog_content': 'string',
-                    'blog_tags': ['tag1','tag2','tag3','tag4'],
-                    'blog_links': ['link1','link2','link3']
-              }
-            </pre
-        >
-      </ul>
-    </div>
-
-    <script type="module" src="script.js"></script>
+      document
+        .querySelector(".login-form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const result = await authAdmin();
+          if (result) {
+            window.location.href = "./draft.html";
+          } else {
+            console.log("Authentication failed");
+            // You might want to display an error message to the user here
+          }
+        });
+    </script>
   </body>
 </html>

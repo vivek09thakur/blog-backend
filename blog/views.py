@@ -10,6 +10,19 @@ def index(request):
     html = f'''Blog API is working fine!'''
     return HttpResponse(html)
 
+@csrf_exempt
+def auth(request):
+    if request.method == 'POST':
+        try:
+            credentials = json.loads(request.body)
+            username = credentials.get('username')
+            password = credentials.get('password')
+            if username == 'anuragnyk@gmail.com' and password == 'anurag.medha09':
+                return JsonResponse({'status': 'success', 'message': 'Authentication successful'})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'Authentication failed'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
 
 @csrf_exempt
 def write_blog(request):

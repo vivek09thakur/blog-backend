@@ -1,6 +1,35 @@
 const api_uri = 'https://blog-backend-psi-ten.vercel.app';
 // const api_uri = "http://127.0.0.1:8000/";
 
+function authAdmin() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  fetch(`${api_uri}/auth/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "success") {
+        alert("Authentication successful");
+        localStorage.setItem("token", data.token);
+        if (localStorage.getItem("token")) {
+          window.location.href = "./draft.html";
+        }
+      } else {
+        alert("Authentication failed: " + data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("An error occurred during authentication");
+    });
+}
+
 function writeBlog(event) {
   event.preventDefault();
 
@@ -68,7 +97,7 @@ async function deleteAllBlogs() {
   }
 }
 
-async function delete_blog(blog_id){
+async function delete_blog(blog_id) {
   const response = await fetch(`${api_uri}/delete_blog/${blog_id}/`, {
     method: "DELETE",
     headers: {
@@ -97,4 +126,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-export { writeBlog, fetchBlogs, delete_blog, deleteAllBlogs };
+export { writeBlog, fetchBlogs, delete_blog, deleteAllBlogs, authAdmin };
