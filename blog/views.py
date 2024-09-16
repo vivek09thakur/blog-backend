@@ -18,7 +18,8 @@ def auth(request):
             username = credentials.get('username')
             password = credentials.get('password')
             if username == 'anuragnyk@gmail.com' and password == 'anurag.medha09':
-                return JsonResponse({'status': 'success', 'message': 'Authentication successful'})
+                auth_token = ''.join(random.choices('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=16))
+                return JsonResponse({'status': 'success', 'message': 'Authentication successful', 'auth_token': auth_token})
             else:
                 return JsonResponse({'status': 'error', 'message': 'Authentication failed'})
         except Exception as e:
