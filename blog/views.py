@@ -71,7 +71,8 @@ def get_blogs(request):
         return JsonResponse({'status': 'success', 'blogs': blog_list})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
-    
+
+@method_decorator(csrf_exempt, name='dispatch')
 def delete_blog(request, blog_id):
     try:
         blog = BlogPost.objects.get(id=blog_id)
@@ -81,17 +82,6 @@ def delete_blog(request, blog_id):
         return JsonResponse({'status': 'error', 'message': 'Blog post not found'})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
-    
-
-def delete_all_blogs(request):
-    if request.method == 'POST':
-        try:
-            BlogPost.objects.all().delete()
-            return JsonResponse({'status': 'success', 'message': 'All blog posts deleted successfully'})
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)})
-    else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
 
 @method_decorator(csrf_exempt, name='dispatch')
