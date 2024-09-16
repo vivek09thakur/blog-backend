@@ -1,5 +1,5 @@
-const api_uri = 'https://blog-backend-psi-ten.vercel.app';
-// const api_uri = "http://127.0.0.1:8000/";
+// const api_uri = "https://blog-backend-psi-ten.vercel.app";
+const api_uri = "http://127.0.0.1:8000/";
 
 function authAdmin() {
   const username = document.getElementById("username").value;
@@ -97,18 +97,23 @@ async function deleteAllBlogs() {
   }
 }
 
-async function delete_blog(blog_id) {
-  const response = await fetch(`${api_uri}/delete_blog/${blog_id}/`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  if (data.status === "success") {
-    alert(data.message);
-  } else {
-    alert("Error deleting blog post: " + data.message);
+async function delete_blog_by_id(blog_id) {
+  try {
+    const response = await fetch(`${api_uri}/delete_blog_by_id/${blog_id}/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (data.status === "success") {
+      alert(data.message);
+    } else {
+      alert("Error deleting blog post: " + data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("An error occurred while deleting the blog post.");
   }
 }
 
@@ -126,4 +131,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-export { writeBlog, fetchBlogs, delete_blog, deleteAllBlogs, authAdmin };
+export { writeBlog, fetchBlogs, deleteAllBlogs, authAdmin, delete_blog_by_id };

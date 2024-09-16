@@ -1,4 +1,4 @@
-import { fetchBlogs, delete_blog } from "./script.js";
+import { fetchBlogs, delete_blog_by_id } from "./script.js";
 
 function displayBlogs(blogList) {
   const blogContainer = document.getElementById("blog-container");
@@ -24,7 +24,7 @@ function displayBlogs(blogList) {
   deleteButtons.forEach(button => {
     button.addEventListener('click', function() {
       const blogId = this.getAttribute('data-id');
-      delete_blog(blogId).then(() => {
+      delete_blog_by_id(blogId).then(() => {
         // Refresh the blog list after deletion
         fetchBlogs()
           .then((blogs) => displayBlogs(blogs))
